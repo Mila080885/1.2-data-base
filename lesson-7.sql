@@ -1,3 +1,4 @@
+-- ДЗ 6 урока (не успела сдать ранее)
 -- 1. видоизменила решение заданий 
 -- 1/1 Выбираем друзей пользователя с двух сторон отношения дружбы с активным статусом
 USE vk;
@@ -67,3 +68,27 @@ FROM users
 WHERE id IN (SELECT * FROM (SELECT id FROM users ORDER BY created_at LIMIT 10) AS count_likes)
 GROUP BY users.id
 ORDER BY total;
+
+--ДЗ урока 7
+
+-- 1. Составьте список пользователей users, которые осуществили хотя бы один заказ orders в интернет магазине
+SELECT users.id, users.name
+FROM
+  users
+JOIN
+  orders
+ON
+  usersu.id = orders.user_id;
+ 
+ -- 2. Выведите список товаров products и разделов catalogs, который соответствует товару.
+SELECT products.id,  products.name AS 'product', catalogs.name AS 'catalog'
+FROM
+  products
+LEFT JOIN
+  catalogs
+ON
+  products.catalog_id = catalogs.id;
+
+ 
+
+

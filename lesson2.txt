@@ -1,0 +1,103 @@
+mila@mila-VirtualBox:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.18 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE example;
+Query OK, 1 row affected (0,05 sec)
+
+mysql> USE example;
+Database changed
+mysql> 
+mysql> CREATE TABLE IF NOT EXISTS users (
+    -> id SERIAL,
+    -> name VARCHAR (255) NOT NULL UNIQUE 
+    -> );
+Query OK, 0 rows affected (0,12 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| example            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| shop               |
+| sys                |
++--------------------+
+6 rows in set (0,00 sec)
+
+
+mysql> exit
+Bye
+
+mila@mila-VirtualBox:~$ mysqldump mysql > exampl.sql
+mysqldump: Got error: 1045: Access denied for user 'mila'@'localhost' (using password: NO) when trying to connect
+
+mila@mila-VirtualBox:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 12
+Server version: 8.0.18 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE sample;
+Query OK, 1 row affected (0,01 sec)
+
+mysql> exit
+Bye
+
+mila@mila-VirtualBox:~$ mysql sample < example.sql
+bash: example.sql: Нет такого файла или каталога
+
+mila@mila-VirtualBox:/$ find ~  -maxdepth 3 -type f -name "*.sql"
+/home/mila/exampl.sql
+mila@mila-VirtualBox:/$ cd /home/mila
+mila@mila-VirtualBox:~$ ls
+ examples.desktop                    Документы     Общедоступные
+ exampl.sql                          Загрузки     'Рабочий стол'
+ mysql-apt-config_0.8.10-1_all.deb   Изображения   Шаблоны
+ Видео                               Музыка
+mila@mila-VirtualBox:~$ mysql sample < exampl.sql
+ERROR 1045 (28000): Access denied for user 'mila'@'localhost' (using password: NO)
+
+mila@mila-VirtualBox:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 17
+Server version: 8.0.18 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SYSTEM ls ~
+ examples.desktop		     Документы	   Общедоступные
+ exampl.sql			     Загрузки	  'Рабочий стол'
+ mysql-apt-config_0.8.10-1_all.deb   Изображения   Шаблоны
+ Видео				     Музыка
+mysql> exit
+Bye
+
+
